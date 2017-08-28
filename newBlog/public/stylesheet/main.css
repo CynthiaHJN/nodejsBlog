@@ -94,6 +94,7 @@ a:hover {
 	line-height: 50px;
 	color: #FFFFFF;
 	font-size: 16px;
+	cursor: pointer;
 }
 
 /* 新增文章————左边新建标签栏 */

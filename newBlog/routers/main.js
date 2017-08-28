@@ -33,11 +33,13 @@ router.get('/view/article', function(req, res, next) {
     var newObject = "category" ? Content.find().sort({ _id: -1 }).populate("category") : Content.find().sort({ _id: -1 });
     var newObj = "user" ? newObject.populate("user") : newObject;
     newObj.then(function(contents) {
-    	Category.find
-        res.render('main/article', {
-            userInfo: req.session.userInfo,
-            contents: contents
-        });
+    	Category.find().limit(5).then(function(category){
+	    	res.render('main/article', {
+	        	userInfo: req.session.userInfo,
+	        	contents: contents,
+	        	categories:category
+	        });
+    	});
     });
 });
 router.post('/view/article', function(req, res, next) {});

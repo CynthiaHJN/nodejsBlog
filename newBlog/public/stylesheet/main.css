@@ -79,6 +79,12 @@ a:hover {
 }
 
 
+.recommand-list{
+	width: 38%;
+	float: right;
+}
+
+
 /* 新增文章————左边新建标签栏 */
 
 .toolbar {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/header.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/index.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/main.css" />
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../public/javascript/header.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+    {% include 'header.html' %}
+    <section class="articlePart">
+        <ul class="article-list">
+            {% for content in contents %}
+            <script>
+                console.log("{{content._id.toString()}}");
+            </script>
+            <li class="article-item">
+                <div class="article-user">
+                    <span class="au-headpic"><img src="../../public/{{content.user.headpic}}"/></span>
+                    <span class="au-name">{{content.user.username}}</span>
+                    <span class="au-time">{{content.date}}</span>
+                </div>
+                <h4 class="article-title"><a href="/view/article_detail?id={{content._id.toString()}}">{{content.title}}</a></h4>
+                <div class="article-description">{{content.description}}</div>
+                <div class="article-operation">
+                    <span class="article-category">{{content.category.name}}</span>
+                    <span>阅读量&nbsp{{content.views}}</span>
+                </div>
+                <hr/>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/main.css" />
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/showdown/1.3.0/showdown.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../public/javascript/header.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+    <section>
+        <div class="col-md-2 toolbar">
+            <div class="returnBtn" style="cursor:pointer;">回首页</div>
+            <div id="new-category" class="new-category">+新增分类</div>
+            <ul class="category-list">
+                {% if contents!='' %} {% for content in contents %}
+                <li class="category-item">{{content.category.name}}</li>
+                {% endfor %} {% else %}
+                <li class="category-item">日记本</li>
+                <li class="category-item">随笔</li>
+                {% endif %}
+            </ul>
+            <a class="recycle">
+                <i class="fa fa-trash"></i>
+                <span>回收站</span>
+            </a>
+        </div>
+        <div class="col-md-3 noteslist">
+            <div class="new-note">
+                <a class="new-note-link">
+                    <i class="icon fa fa-plus-circle"></i>
+                    <span>新建文章</span>
+                </a>
+            </div>
+            <ul class="note-list">
+            </ul>
+        </div>
+        <div class="col-md-7 editor">
+            <div class="no-notes">
+                <span>Cynthia'Blog</span>
+            </div>
+            <div class="edit-note" style="display:none;">
+                <input class="title" value="无标题文章"></input>
+                <textarea name="" id="description" rows="3" placeholder="此处填写文章简介"></textarea>
+                <div class="kalamu-box" id="editor">
+                    <ul class="edit-tool-list">
+                        <li class="edit-tool-item">
+                            <a class="fa fa-bold" id="beBold"></a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a class="fa fa-italic" id="beItalic"></a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a class="fa fa-strikethrough" id="beStrikethrough"></a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a class="fa fa-quote-left" id="quote"></a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a class="fa fa-picture-o" id="putPicture"></a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a class="fa fa-minus-no-use" id="drawHr">—</a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a id="h1">H1</a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a id="h2">H2</a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a id="h3">H3</a>
+                        </li>
+                        <li class="edit-tool-item">
+                            <a id="h4">H4</a>
+                        </li>
+                        <li class="edit-tool-item pull-right post-note">
+                            <a><i class="fa fa-mail-forward"></i>发布文章</a>
+                        </li>
+                    </ul>
+                    <div class="edit-page" contentEditable="true"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script>
+    var i = 0;
+    $(function() {
+        $('.category-list .category-item:eq(0)').addClass('active');
+    });
+
+    $('.new-note-link').click(function() {
+        i += 1;
+        $('.note-list').prepend('<li class="note-item"><div class="note-title"><span class="nt">无标题文章' + i + '</span><i class="fa fa-gear"></i></div><div class="note-description"></div></li>');
+        $('.note-list .note-item').removeClass('active');
+        $('.note-item:eq(0)').addClass('active');
+        $('.no-notes').hide();
+        $('.edit-note').show();
+        var title = $('.note-list .active .nt').html();
+        $('.edit-note').find('.title').val(title);
+        $('.edit-page').html($('.note-list .active .note-description').html());
+    });
+
+
+    $(document).delegate('.note-item', 'click', function() {
+        $('.note-list .note-item').removeClass('active');
+        $(this).addClass('active');
+        var title = $('.note-list .active .nt').html();
+        $('.edit-note').find('.title').val(title);
+        $('.edit-page').html($('.note-list .active .note-description').html());
+    });
+
+    $('.edit-note').find('.title').on("input propertychange", function() {
+        var title = $(this).val();
+        $('.note-list .active .nt').html(title);
+    });
+
+    $('.edit-page').on("input propertychange", function() {
+        $('.note-list .active .note-description').html($(this).html());
+    });
+
+    $('#new-category').click(function() {
+        if (!$('.category-list .category-item').hasClass('theNewOne')) {
+            $('.category-list .category-item').removeClass('active');
+            $('.category-list .category-item').removeClass('theNewOne');
+            $('.category-list').prepend('<li class="category-item theNewOne active"><div class="editCategory"><input type="text" class="addNewCategory"></input><button class="finish-add"><i class="fa fa-check"></i></button></div></li>');
+        }
+    });
+
+    $(document).delegate('.finish-add', 'click', function() {
+        var category_name = $('.editCategory input').val();
+        $('.category-list').find('.theNewOne').html(category_name);
+        $('.category-list .category-item').removeClass('theNewOne');
+    });
+
+    $(document).delegate('.category-list .category-item', 'click', function() {
+        if (!$(this).hasClass('theNewOne') && $('.category-list .category-item').hasClass('theNewOne')) {
+            $('.category-list').find('.theNewOne').remove();
+        }
+        $('.category-list .category-item').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $(function() {
+        $('.post-note').click(function() {
+            var converter = new showdown.Converter();
+            var noteCnt = $('.edit-page').html();
+            var html = converter.makeHtml(noteCnt);
+            // alert($('.edit-note').find('.title').val() + "\n" + html + "\n" + $('.category-list').find('.active').html());
+            alert(html);
+            $.ajax({
+                url: '/view/article_add',
+                type: 'post',
+                data: {
+                    title: $('.edit-note').find('.title').val(),
+                    content: html,
+                    category: $('.category-list').find('.active').html(),
+                    description: $('#description').val()
+                },
+                dataType: 'json',
+                success: function(data) {
+                    alert(data.message);
+                }
+            });
+        });
+    });
+
+    $('.returnBtn').click(function() {
+        window.location.href = '/';
+    })
+</script>
+
+</html>

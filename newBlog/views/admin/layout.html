@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/admin.css">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+    <header>
+        <p class="webname">后台管理系统</p>
+        <p class="pull-right welcomeWord">你好，<span class="adminname">admin</span>&nbsp&nbsp<span class="signout">退出</span></p>
+    </header>
+    <aside>
+        <ul>
+            <li><a href="">首页</a></li>
+            <li><a href="">设置</a></li>
+            <li><a href="/admin/user">用户管理</a></li>
+            <li id="category">
+                <a href="/admin/category">分类管理</a>
+                <ul class="dropdown">
+                    <li><a href="javascript:;">管理首页</a></li>
+                    <li><a href="/admin/category/add">添加分类</a></li>
+                </ul>
+            </li>
+            <li><a href="/admin/content">文章管理</a></li>
+            <li><a href="">评论管理</a></li>
+        </ul>
+    </aside>
+    <section>
+        {% block main %}{% endblock %}
+    </section>
+    <footer></footer>
+</body>
+<script>
+    $('#category').find('.dropdown').hide();
+    $('#category').hover(function() {
+        $(this).find('.dropdown').stop().slideToggle(400);
+    })
+</script>

@@ -1,0 +1,152 @@
+<header style="height:80px;border-bottom:1px solid #ddd">
+    <div class="navBar">
+        <nav>
+            <a href="index.html" class="webName"><span>琴行</span>Machold Rare Violins</a>
+            <ul class="headUL">
+                <li><a href="/" class="active">首页</a></li>
+                <li><a href="class.html">课程</a></li>
+                <li><a href="knowledge.html">知识</a></li>
+                <li><a href="aboutUs.html">关于我们</a></li>
+                {% if userInfo %}
+                <li class="navName">
+                    <a href="#">{{userInfo.username}}</a>
+                    <ul class="mySubMenu" style="display:none;">
+                        <li class="writeArticle"><a href="/view/article_add">写文章</a></li>
+                        <li class="logout">注销</li>
+                    </ul>
+                </li>
+                {% else %}
+                <li><button id="toLog" class="btn btn-log">登陆</button></li>
+                {% endif %}
+            </ul>
+            <div class="listNav"><i class="fa fa-bars"></i></div>
+        </nav>
+    </div>
+</header>
+<div class="sliderBar none">
+    <ul class="slider-ul">
+        <li><a href="/" class="active">首页</a></li>
+        <li><a href="class.html">课程</a></li>
+        <li><a href="knowledge.html">知识</a></li>
+        <li><a href="aboutUs.html">关于我们</a></li>
+        {% if userInfo %}
+        <li><a href="#">{{userInfo.username}}</a></li>
+        <li><a href="/view/article_add">写文章</a></li>
+        <li class="logout"><a href="#">注销</a></li>
+        {% else %}
+        <li><button id="toLog" class="btn btn-log">登陆</button></li>
+        {% endif %}
+    </ul>
+</div>
+<section class="signPart none">
+    <div class="signBox">
+        <div class="signLeftBox">
+            <div class="Banner">
+            </div>
+        </div>
+        <div class="signRightBox">
+            <div class="login">
+                <ul>
+                    <li class="signin on">登陆</li>
+                    <strong style="font-size:20px;color:#999;">·</strong>
+                    <li class="register">注册</li>
+                </ul>
+                <div class="userLogin">
+                    <br/>
+                    <input class="form-control" id="telphone" type="tel" placeholder="请输入手机号" />
+                    <br/>
+                    <input class="form-control" id="password" type="password" placeholder="请输入密码" />
+                    <div style="width:80%;height:40px;line-height:40px;margin:0 auto;color:#999">
+                        <a style="cursor:pointer;float:left;">忘记密码?</a>
+                        <a style="cursor:pointer;float:right;">登陆遇到问题</a>
+                    </div>
+                    <button id="submitLog" class="btn btn-info btn-block">登陆</button>
+                    <h6>社交账号登陆</h6>
+                    <ul class="shejiao">
+                        <li><img src="../../public/image/sinaLogo.png" /></li>
+                        <li><img src="../../public/image/wechatLogo.png" /></li>
+                        <li><img src="../../public/image/qqLogo.png" /></li>
+                    </ul>
+                </div>
+                <div class="userRegister none">
+                    <br/>
+                    <input class="form-control" id="username1" type="text" placeholder="您的昵称" required/>
+                    <br/>
+                    <input class="form-control" id="telphone1" type="tel" placeholder="手机号" required/>
+                    <br/>
+                    <input class="form-control" id="password1" type="password" required placeholder="设置密码" />
+                    <button id="submitReg" class="btn btn-success btn-block">注册</button>
+                    <h6>社交账号直接注册</h6>
+                    <ul class="shejiao">
+                        <li><img src="../../public/image/sinaLogo.png" /></li>
+                        <li><img src="../../public/image/wechatLogo.png" /></li>
+                        <li><img src="../../public/image/qqLogo.png" /></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function() {
+        $('.signin').click(function() {
+            $('.signin').addClass('on');
+            $('.register').removeClass('on');
+            $('.userLogin').removeClass('none');
+            $('.userRegister').addClass('none');
+        });
+        $('.register').click(function() {
+            $('.register').addClass('on');
+            $('.signin').removeClass('on');
+            $('.userLogin').addClass('none');
+            $('.userRegister').removeClass('none');
+        });
+        $('#submitReg').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/api/register',
+                dataType: 'json',
+                data: {
+                    username: $('#username1').val(),
+                    telphone: $('#telphone1').val(),
+                    password: $('#password1').val()
+                },
+                success: function(data) {
+                    alert(data.message);
+                    $('.userLogin').removeClass('none');
+                    $('.userRegister').addClass('none');
+                }
+            });
+        });
+        $('#toLog').click(function() {
+            $('.signPart').removeClass('none');
+        });
+        $('.navName').hover(function() {
+            $('.mySubMenu').toggle();
+        });
+        $('#submitLog').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/api/login',
+                dataType: 'json',
+                data: {
+                    telphone: $('#telphone').val(),
+                    password: $('#password').val()
+                },
+                success: function(data) {
+                    window.location.reload();
+                }
+            });
+        });
+        $('.logout').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/api/logout',
+                dataType: 'json',
+                success: function(data) {
+                    window.location.reload();
+                }
+            });
+        });
+    })
+</script>

@@ -1,0 +1,33 @@
+{% extends 'layout.html' %} {% block main %}
+<div class="contentPart">
+    <h3 class="text-center">文章管理</h3>
+    <a class="addBtn pull-right" href="content/add">写文章</a>
+    <table class="users-list table">
+        <thead>
+            <tr>
+                <th>标题</th>
+                <th>所属分类</th>
+                <th>发布时间</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for content in contents %}
+
+            <tr>
+                <td>{{content.title}}</td>
+                <td>{{content.category.name}}</td>
+                <td>
+                    {{content.date}}
+                </td>
+                <td>
+                    <a href="/admin/content/edit?id={{content._id.toString()}}">修改 </a> |
+                    <a href="/admin/content/delete?id={{content._id.toString()}}"> 删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr/> {% include 'page.html' %}
+</div>
+{% endblock %}

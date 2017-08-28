@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/header.css" />
+    <link rel="stylesheet" href="../../public/stylesheet/index.css" />
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../public/javascript/canvas.js"></script>
+    <script type="text/javascript" src="../../public/javascript/header.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+
+<body>
+    <header class="site-header">
+        <div class="navBar">
+            <nav>
+                <a href="index.html" class="webName"><span>琴行</span>Machold Rare Violins</a>
+                <ul class="headUL">
+                    <li><a href="index.html" class="active">首页</a></li>
+                    <li><a href="class.html">课程</a></li>
+                    <li><a href="knowledge.html">知识</a></li>
+                    <li><a href="aboutUs.html">关于我们</a></li>
+                    {% if userInfo %}
+                    <li class="navName">
+                        <a href="#">{{userInfo.username}}</a>
+                        <ul class="mySubMenu" style="display:none;">
+                            <li class="writeArticle">写文章</li>
+                            <li class="logout">注销</li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li><button id="toLog" class="btn btn-log">登陆</button></li>
+                    {% endif %}
+                </ul>
+                <div class="listNav"><i class="fa fa-bars"></i></div>
+            </nav>
+        </div>
+        <canvas width="100%" height="340" style="display: block; margin: 0px auto;"></canvas>
+    </header>
+    <div class="sliderBar none">
+        <ul class="slider-ul">
+            <li><a href="index.html" class="active">首页</a></li>
+            <li><a href="class.html">课程</a></li>
+            <li><a href="knowledge.html">知识</a></li>
+            <li><a href="aboutUs.html">关于我们</a></li>
+            {% if userInfo %}
+            <li><a href="#">{{userInfo.username}}</a></li>
+            <li class="writeArticle">写文章</li>
+            <li class="logout"><a href="#">注销</a></li>
+            {% else %}
+            <li><button id="toLog" class="btn btn-log">登陆</button></li>
+            {% endif %}
+        </ul>
+    </div>
+    <section class="mainPart">
+        <div class="mainContent">
+            <div class="logo"><img src="../../public/image/piano.png" /></div>
+            <div class="mainWordPart">
+                <h2>琴行</h2>
+                <h4 style="color: #515151;">这是一家课程丰富，环境优雅，交通便捷的琴行</h4>
+                <h5 style="color: #868686;">我们为广大学员准备了一系列精品课程，聘请了一大批优秀的教师。为提供良好的上课环境，我们每天都会清理琴房，定期检修设备。</h5>
+                <i class="fa fa-ellipsis-h" style="font-size:20px;"></i><br>
+                <button class="btn btn-tiyan">课程体验</button>
+            </div>
+            <div class="recommand-list">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="courseBox">
+                            <div class="imgPart">
+                                <img src="../../public/image/violin-pic.jpg" />
+                            </div>
+                            <div class="introPart">
+                                <p>小提琴进阶（6级）30课时</p>
+                                <p>￥<span>4500</span><span>6000</span></p>
+                                <button class="btn btn-log">我要报名</button>
+                                <a>课程详情</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="courseBox">
+                            <div class="imgPart">
+                                <img src="../../public/image/piano-pic.jpg" />
+                            </div>
+                            <div class="introPart">
+                                <p>钢琴入门（零基础）30课时</p>
+                                <p>￥<span>4500</span><span>6000</span></p>
+                                <button class="btn btn-log">我要报名</button>
+                                <a>课程详情</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="courseBox">
+                            <div class="imgPart">
+                                <img src="../../public/image/pipa-pic.jpg" />
+                            </div>
+                            <div class="introPart">
+                                <p>琵琶初级30课时</p>
+                                <p>￥<span>4500</span><span>6000</span></p>
+                                <button class="btn btn-log">我要报名</button>
+                                <a>课程详情</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="subpart">
+        <div class="mainWordPart2">
+            <h2>琴行</h2>
+            <h4 style="color: #515151;">这是一家课程丰富，环境优雅，交通便捷的琴行</h4>
+            <h5 style="color: #868686;">我们为广大学员准备了一系列精品课程，聘请了一大批优秀的教师。为提供良好的上课环境，我们每天都会清理琴房，定期检修设备。</h5>
+            <i class="fa fa-ellipsis-h" style="font-size:20px;"></i><br>
+        </div>
+        <div class="sub-list">
+            <ul>
+                <li class="item">
+                    <img src="../../public/image/piano-pic.jpg" />
+                </li>
+                <li class="item">
+
+                </li>
+                <li class="item">
+                    <img src="../../public/image/manyViolin.jpg" />
+                </li>
+                <li class="item">
+
+                </li>
+                <li class="item">
+
+                </li>
+                <li class="item">
+                    <img src="../../public/image/instrument.jpg" />
+                </li>
+                <li class="item">
+
+                </li>
+                <li class="item">
+                    <img src="../../public/image/room.jpg" />
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="signPart none">
+        <div class="signBox">
+            <div class="signLeftBox">
+                <div class="Banner">
+                </div>
+            </div>
+            <div class="signRightBox">
+                <div class="login">
+                    <ul>
+                        <li class="signin on">登陆</li>
+                        <strong style="font-size:20px;color:#999;">·</strong>
+                        <li class="register">注册</li>
+                    </ul>
+                    <div class="userLogin">
+                        <br/>
+                        <input class="form-control" id="telphone" type="tel" placeholder="请输入手机号" />
+                        <br/>
+                        <input class="form-control" id="password" type="password" placeholder="请输入密码" />
+                        <div style="width:80%;height:40px;line-height:40px;margin:0 auto;color:#999">
+                            <a style="cursor:pointer;float:left;">忘记密码?</a>
+                            <a style="cursor:pointer;float:right;">登陆遇到问题</a>
+                        </div>
+                        <button id="submitLog" class="btn btn-info btn-block">登陆</button>
+                        <h6>社交账号登陆</h6>
+                        <ul class="shejiao">
+                            <li><img src="../../public/image/sinaLogo.png" /></li>
+                            <li><img src="../../public/image/wechatLogo.png" /></li>
+                            <li><img src="../../public/image/qqLogo.png" /></li>
+                        </ul>
+                    </div>
+                    <div class="userRegister none">
+                        <br/>
+                        <input class="form-control" id="username1" type="text" placeholder="您的昵称" required/>
+                        <br/>
+                        <input class="form-control" id="telphone1" type="tel" placeholder="手机号" required/>
+                        <br/>
+                        <input class="form-control" id="password1" type="password" required placeholder="设置密码" />
+                        <button id="submitReg" class="btn btn-success btn-block">注册</button>
+                        <h6>社交账号直接注册</h6>
+                        <ul class="shejiao">
+                            <li><img src="../../public/image/sinaLogo.png" /></li>
+                            <li><img src="../../public/image/wechatLogo.png" /></li>
+                            <li><img src="../../public/image/qqLogo.png" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>Copyright © 2014-2017 杭州曲友科技有限公司 All Rights Reserved.备案/许可证编号：浙ICP备11054850号-1 公安机关备案号:33011802000888</p>
+        <p>联系方式：Email:allmusicren@163.com 中国.杭州</p>
+    </footer>
+</body>
+
+</html>
+<script>
+    $(function() {
+        $('.signin').click(function() {
+            $('.signin').addClass('on');
+            $('.register').removeClass('on');
+            $('.userLogin').removeClass('none');
+            $('.userRegister').addClass('none');
+        });
+        $('.register').click(function() {
+            $('.register').addClass('on');
+            $('.signin').removeClass('on');
+            $('.userLogin').addClass('none');
+            $('.userRegister').removeClass('none');
+        });
+        $('#submitReg').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/api/register',
+                dataType: 'json',
+                data: {
+                    username: $('#username1').val(),
+                    telphone: $('#telphone1').val(),
+                    password: $('#password1').val()
+                },
+                success: function(data) {
+                    alert(data.message);
+                    $('.userLogin').removeClass('none');
+                    $('.userRegister').addClass('none');
+                }
+            });
+        });
+        $('#toLog').click(function() {
+            $('.signPart').removeClass('none');
+        });
+        $('.navName').hover(function() {
+            $('.mySubMenu').toggle();
+        });
+        $('#submitLog').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/api/login',
+                dataType: 'json',
+                data: {
+                    telphone: $('#telphone').val(),
+                    password: $('#password').val()
+                },
+                success: function(data) {
+                    window.location.reload();
+                }
+            });
+        });
+        $('.logout').click(function() {
+            $.ajax({
+                type: 'post',
+                url: '/api/logout',
+                dataType: 'json',
+                success: function(data) {
+                    window.location.reload();
+                }
+            });
+        });
+    })
+</script>

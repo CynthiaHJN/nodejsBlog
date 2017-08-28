@@ -18,6 +18,7 @@ a:hover {
 }
 
 .article-list {
+	display: inline-block;
     width: 60%;
 }
 
@@ -80,10 +81,20 @@ a:hover {
 
 
 .recommand-list{
-	width: 38%;
+	width: 30%;
 	float: right;
 }
 
+.recommand-item{
+	height: 50px;
+	margin-bottom: 15px;
+	/*background-color: #CD96CD;*/
+	border-radius: 5px;
+	text-align: center;
+	line-height: 50px;
+	color: #FFFFFF;
+	font-size: 16px;
+}
 
 /* 新增文章————左边新建标签栏 */
 
